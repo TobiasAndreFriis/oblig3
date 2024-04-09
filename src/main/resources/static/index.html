@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kinobiletter</title>
+    <style>
+        input[type='number']{
+            width: 60px;
+        }
+        input{
+            max-width: 200px;
+        }
+        select{
+            max-width: 200px;
+        }
+        .label-mangler{
+            width: 300px;
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Bestilling av kinobilletter</h1>
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="filmer">Velg film:</label>
+                                <select name="filmer" id="filmer" class="form-control">
+                                <option value=""></option>
+                                <option value="Harry Potter">Harry Potter</option>
+                                <option value="James Bond">James Bond</option>
+                                <option value="Star Wars">Star Wars</option>
+                                <option value="Avatar">Avatar</option>
+                            </select>
+                            <label for="filmer" id="filmerInfo" class="label-mangler"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="antall">Antall</label>
+                            <input type="number" id="antall" name="antall" min="0" class="form-control">
+                            <label for="antall" id="antallInfo" class="label-mangler"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="fornavn">Fornavn</label>
+                            <input type="text" id="fornavn" name="fornavn" class="form-control">
+                            <label for="fornavn" id="fornavnInfo" class="label-mangler"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="etternavn">Etternavn</label>
+                            <input type="text" id="etternavn" name="etternavn" class="form-control">
+                            <label for="etternavn" id="etternavnInfo" class="label-mangler"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefonnr">TelefonNr</label>
+                            <input type="text" id="telefonnr" name="telefonnr" class="form-control">
+                            <label for="telefonnr" id="telefonnrInfo" class="label-mangler"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="epost">Epost</label>
+                            <input type="text" id="epost" name="epost" class="form-control">
+                            <label for="epost" id="epostInfo" class="label-mangler"></label>
+                        </div>
+                    </form>
+
+                    <br>
+                    <button id="kjøpBillettKnapp" onclick="kjopBillett()" class="btn btn-primary">Kjøp billett</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Alle billetter</h2>
+                    <div id="filmListe"></div>
+                    <br>
+                    <button id="slettBilletterKnapp" onclick="slettBilletter()" class="btn btn-danger">Slett alle billettene</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
