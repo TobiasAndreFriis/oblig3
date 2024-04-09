@@ -48,11 +48,11 @@ public class Billett {
         this.etternavn = etternavn;
     }
 
-    public String getTelefonNr() {
+    public String getTelefonnr() {
         return telefonnr;
     }
 
-    public void setTelefonNr(String telefonnr) {
+    public void setTelefonnr(String telefonnr) {
         this.telefonnr = telefonnr;
     }
 

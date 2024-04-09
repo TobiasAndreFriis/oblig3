@@ -114,7 +114,8 @@ function printBillett(billetter){
 }
 function hentBilletter(){
     $.get("/hentBilletter", function (data){
-        printBillett(data);
+        //console.log(data);
+        //printBillett(data);
     });
 }
 function kjopBillett(){
