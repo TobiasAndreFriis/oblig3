@@ -107,15 +107,15 @@ function printBillett(billetter){
     for (let print of billetter){
 
         printUt += "<div class='col-xs-2'>"+print.film+"</div><div class='col-xs-2'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
-            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonNr+"</div><div class='col-xs-2'>"+print.epost+"</div><br>"
+            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+"</div><br>"
 
     }
     liste.innerHTML = printUt;
 }
 function hentBilletter(){
     $.get("/hentBilletter", function (data){
-        //console.log(data);
-        //printBillett(data);
+        console.log(data);
+        printBillett(data);
     });
 }
 function kjopBillett(){

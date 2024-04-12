@@ -7,6 +7,10 @@ public class Billett {
     private String etternavn;
     private String telefonnr;
     private String epost;
+    private Long id;
+
+    public Billett(){}
+
     public Billett(String film, int antall, String fornavn, String etternavn, String telefonnr, String epost){
         this.film = film;
         this.antall = antall;
@@ -14,6 +18,16 @@ public class Billett {
         this.etternavn = etternavn;
         this.telefonnr = telefonnr;
         this.epost = epost;
+    }
+
+    public Billett(Long id, String film, int antall, String fornavn, String etternavn, String telefonnr, String epost){
+        this.film = film;
+        this.antall = antall;
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+        this.telefonnr = telefonnr;
+        this.epost = epost;
+        this.id = id;
     }
 
     public String getFilm() {
@@ -62,5 +76,20 @@ public class Billett {
 
     public void setEpost(String epost) {
         this.epost = epost;
+    }
+
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "film='" + film + '\'' +
+                ", antall=" + antall + '\'' +
+                ", fornavn='" + fornavn + '\'' +
+                ", etternavn='" + etternavn + '\'' +
+                ", telefonnr=" + telefonnr + '\'' +
+                ", epost='" + epost + '\'' +
+                '}';
     }
 }
