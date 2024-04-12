@@ -1,4 +1,5 @@
 Oblig 2
+
 OsloMet brukernavn: tofri9269
 
 GitHub brukernavn: TobiasAndreFriis
