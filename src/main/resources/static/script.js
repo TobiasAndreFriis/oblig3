@@ -106,8 +106,8 @@ function printBillett(billetter){
 
     for (let print of billetter){
 
-        printUt += "<div class='col-xs-2'>"+print.film+"</div><div class='col-xs-2'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
-            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+"</div><br>"
+        printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-2'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
+            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+"</div></div><br>"
 
     }
     liste.innerHTML = printUt;
@@ -144,7 +144,7 @@ function kjopBillett(){
 }
 function slettBilletter(){
     fjernManglerInnhold();
-    $.post("/tømListe", function(){})
+    $.get("/tømListe", function(){})
     document.getElementById("filmListe").innerText = "";
     fjernInnhold();
 }

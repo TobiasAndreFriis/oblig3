@@ -83,7 +83,7 @@ public class Billett {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Billett{" +
                 "film='" + film + '\'' +
                 ", antall=" + antall + '\'' +
                 ", fornavn='" + fornavn + '\'' +

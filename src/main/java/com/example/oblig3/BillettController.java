@@ -27,7 +27,7 @@ public class BillettController {
         return rep.hentAlleBilletter();
     }
 
-    @PostMapping("/tømListe")
+    @GetMapping("/tømListe")
     public void tomBillettListe(){
         rep.slettAlleBilletter();
         System.out.println("Billett tabellen er tømt!");
