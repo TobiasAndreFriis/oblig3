@@ -43,6 +43,11 @@ public class BillettRepository {
         return db.query(sql, new BillettRowMapper());
     }
 
+    public List<Billett> hentBillett(Long id){
+        String sql = "SELECT * FROM Billett WHERE id = '"+id+"';";
+        return db.query(sql, new BillettRowMapper());
+    }
+
     public void slettAlleBilletter(){
         String sql = "DELETE FROM Billett";
         db.update(sql);

@@ -27,6 +27,11 @@ public class BillettController {
         return rep.hentAlleBilletter();
     }
 
+    @GetMapping("/hentBillett")
+    public List<Billett> hentBillett(Long id){
+        return rep.hentBillett(id);
+    }
+
     @DeleteMapping("/tømListe")
     public void tomBillettListe(){
         rep.slettAlleBilletter();
