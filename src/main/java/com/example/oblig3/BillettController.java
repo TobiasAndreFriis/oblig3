@@ -25,13 +25,11 @@ public class BillettController {
 
     @GetMapping("/hentBilletter")
     public List<Billett> hentBilletter(){
-        System.out.println(rep.hentAlleBilletter());
         return rep.hentAlleBilletter();
     }
 
     @GetMapping("/hentBillett")
     public Billett hentBillett(Billett billett){
-        System.out.println(rep.hentBillett(billett));
         return rep.hentBillett(billett);
     }
 

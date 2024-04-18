@@ -132,13 +132,13 @@ function printBillett(billetter){
     let teller = 0;
     let liste = document.getElementById("filmListe");
     liste.innerHTML = "";
-    let printUt = "<div class='col-xs-2'>Film</div>"+"<div class='col-xs-2'>Antall</div>"+"<div class='col-xs-2'>Fornavn</div>"+
-        "<div class='col-xs-2'>Etternavn</div>"+"<div class='col-xs-2'>TelefonNr</div>"+"<div class='col-xs-2'>Epost</div>"+"<div class='col-xs-2'></div><br><br>"
+    let printUt = "<div class='col-xs-2'>Film</div>"+"<div class='col-xs-1'>Antall</div>"+"<div class='col-xs-2'>Fornavn</div>"+
+        "<div class='col-xs-2'>Etternavn</div>"+"<div class='col-xs-2'>TelefonNr</div>"+"<div class='col-xs-2'>Epost</div>"+"<div class='col-xs-1'></div><br><br>"
     for (let print of billetter){
 
-        printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-2'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
+        printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-1'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
             "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+
-            "<button onclick='endreBillettBoks("+print.id+")'>Endre</button></div></div><br>";
+            "</div><div class='col-xs-1'><button onclick='endreBillettBoks("+print.id+")'>Endre</button></div></div><br>";
         teller++;
     }
     liste.innerHTML = printUt;
