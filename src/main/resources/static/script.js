@@ -97,17 +97,28 @@ function innholdSjekk(film, antall, fornavn, etternavn, telefonnr, epost){
     }
     return gyldig;
 }
+function endreBillett(billett){
+    var endreBoks = document.getElementById("endreBillettBoks");
+    if (endreBoks.style.display === "none"){
+        endreBoks.style.display = "block";
+    }
+    else{
+        endreBoks.style.display = "none";
+    }
+
+}
 function printBillett(billetter){
 
     let liste = document.getElementById("filmListe");
     liste.innerHTML = "";
     let printUt = "<div class='col-xs-2'>Film</div>"+"<div class='col-xs-2'>Antall</div>"+"<div class='col-xs-2'>Fornavn</div>"+
-        "<div class='col-xs-2'>Etternavn</div>"+"<div class='col-xs-2'>TelefonNr</div>"+"<div class='col-xs-2'>Epost</div><br><br>"
+        "<div class='col-xs-2'>Etternavn</div>"+"<div class='col-xs-2'>TelefonNr</div>"+"<div class='col-xs-2'>Epost</div>"+"<div class='col-xs-2'></div><br><br>"
 
     for (let print of billetter){
 
         printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-2'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
-            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+"</div></div><br>"
+            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+
+            "<button onclick='endreBillett("+print+")'>Endre</button></div></div><br>"
 
     }
     liste.innerHTML = printUt;
@@ -143,8 +154,13 @@ function kjopBillett(){
     fjernInnhold();
 }
 function slettBilletter(){
-    fjernManglerInnhold();
-    $.get("/tømListe", function(){})
-    document.getElementById("filmListe").innerText = "";
-    fjernInnhold();
+    $.ajax({
+        url: "/tømListe",
+        type: "DELETE",
+        success: function (){
+            fjernManglerInnhold();
+            document.getElementById("filmListe").innerText = "";
+            fjernInnhold();
+        }
+    })
 }
