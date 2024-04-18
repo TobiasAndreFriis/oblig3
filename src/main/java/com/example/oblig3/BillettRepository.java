@@ -1,5 +1,7 @@
 package com.example.oblig3;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -16,6 +18,8 @@ public class BillettRepository {
 
     @Autowired
     private JdbcTemplate db;
+
+    private Logger logger = LoggerFactory.getLogger(BillettRepository.class);
 
     class BillettRowMapper implements RowMapper< Billett > {
         @Override
@@ -43,9 +47,22 @@ public class BillettRepository {
         return db.query(sql, new BillettRowMapper());
     }
 
-    public List<Billett> hentBillett(Long id){
-        String sql = "SELECT * FROM Billett WHERE id = '"+id+"';";
-        return db.query(sql, new BillettRowMapper());
+    public Billett hentBillett(Billett innId){
+        String sql = "SELECT * FROM Billett WHERE id=?";
+        List<Billett> enBillett = db.query(sql, new BillettRowMapper(), innId.getId());
+        return enBillett.get(0);
+    }
+
+    public boolean oppdaterBillett(Billett billett){
+        String sql = "UPDATE Billett SET fornavn=?, etternavn=?, telefonnr=?, epost=? WHERE id=?";
+        try{
+           db.update(sql, billett.getFornavn(), billett.getEtternavn(), billett.getTelefonnr(), billett.getEpost(), billett.getId());
+           return true;
+        }
+        catch(Exception e){
+            logger.error("Feil i endre billetten"+e);
+            return false;
+        }
     }
 
     public void slettAlleBilletter(){

@@ -30,6 +30,18 @@ public class Billett {
         this.id = id;
     }
 
+    public Billett(Long id, String fornavn, String etternavn, String telefonnr, String epost){
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+        this.telefonnr = telefonnr;
+        this.epost = epost;
+        this.id = id;
+    }
+    public Billett(Long id){
+        this.id = id;
+    }
+
+
     public String getFilm() {
         return film;
     }

@@ -79,6 +79,7 @@
                     <div id="endreBillettBoks" style="display: none">
                         <h4>Endre billett:</h4>
                         <form class="form">
+                            <input type="text" id="id"/>
                             <div class="form-group">
                                 <label for="fornavnEndre">Fornavn</label>
                                 <input type="text" id="fornavnEndre" name="fornavn" class="form-control">
@@ -96,7 +97,7 @@
                                 <input type="text" id="epostEndre" name="epost" class="form-control">
                             </div>
                         </form>
-                        <button>Lagre</button>
+                        <button onclick="endreBillett()">Lagre</button>
                     </div>
                     <br>
                     <button id="slettBilletterKnapp" onclick="slettBilletter()" class="btn btn-danger">Slett alle billettene</button>

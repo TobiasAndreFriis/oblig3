@@ -1,10 +1,7 @@
 package com.example.oblig3;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +18,11 @@ public class BillettController {
         System.out.println("Billetten er lagret!");
     }
 
+    @PostMapping("/oppdatere")
+    public void oppdatereBillett(Billett billett){
+        System.out.println(rep.oppdaterBillett(billett));
+    }
+
     @GetMapping("/hentBilletter")
     public List<Billett> hentBilletter(){
         System.out.println(rep.hentAlleBilletter());
@@ -28,8 +30,9 @@ public class BillettController {
     }
 
     @GetMapping("/hentBillett")
-    public List<Billett> hentBillett(Long id){
-        return rep.hentBillett(id);
+    public Billett hentBillett(Billett billett){
+        System.out.println(rep.hentBillett(billett));
+        return rep.hentBillett(billett);
     }
 
     @DeleteMapping("/tømListe")

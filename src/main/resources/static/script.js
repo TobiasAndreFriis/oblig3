@@ -97,7 +97,21 @@ function innholdSjekk(film, antall, fornavn, etternavn, telefonnr, epost){
     }
     return gyldig;
 }
-function endreBillett(id){
+function endreBillett(){
+    const billett = {
+        id : $("#id").val(),
+        fornavn : document.getElementById("fornavnEndre").value,
+        etternavn : document.getElementById("etternavnEndre").value,
+        telefonnr : document.getElementById("telefonnrEndre").value,
+        epost : document.getElementById("epostEndre").value
+    };
+    console.log(billett);
+    $.post("/oppdatere", billett, function (){
+        hentBilletter()
+    })
+
+}
+function endreBillettBoks(id){
     var endreBoks = document.getElementById("endreBillettBoks");
     if (endreBoks.style.display === "none"){
         endreBoks.style.display = "block";
@@ -105,14 +119,14 @@ function endreBillett(id){
     else{
         endreBoks.style.display = "none";
     }
-    $.get("/hentBillett", id, function (data){
+    document.getElementById("id").value = id;
+    idBillett = {id};
+    $.get("/hentBillett", idBillett, function (data) {
         document.getElementById("fornavnEndre").value = data.fornavn;
         document.getElementById("etternavnEndre").value = data.etternavn;
         document.getElementById("telefonnrEndre").value = data.telefonnr;
         document.getElementById("epostEndre").value = data.epost;
     })
-
-
 }
 function printBillett(billetter){
     let teller = 0;
@@ -124,7 +138,7 @@ function printBillett(billetter){
 
         printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-2'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
             "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+
-            "<button onclick='endreBillett("+print.id+")'>Endre</button></div></div><br>";
+            "<button onclick='endreBillettBoks("+print.id+")'>Endre</button></div></div><br>";
         teller++;
     }
     liste.innerHTML = printUt;
