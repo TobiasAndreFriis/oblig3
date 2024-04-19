@@ -97,9 +97,22 @@ function innholdSjekk(film, antall, fornavn, etternavn, telefonnr, epost){
     }
     return gyldig;
 }
+function slettBillett(id){
+    let idBillett = {id};
+    $.ajax({
+        url: "/slettBillett",
+        type: "DELETE",
+        data: idBillett,
+        success: function (){
+            hentBilletter()
+        }
+    })
+}
 function endreBillett(){
     const billett = {
         id : $("#id").val(),
+        film : document.getElementById("filmerEndre").value,
+        antall : document.getElementById("antallEndre").value,
         fornavn : document.getElementById("fornavnEndre").value,
         etternavn : document.getElementById("etternavnEndre").value,
         telefonnr : document.getElementById("telefonnrEndre").value,
@@ -120,8 +133,10 @@ function endreBillettBoks(id){
         endreBoks.style.display = "none";
     }
     document.getElementById("id").value = id;
-    idBillett = {id};
+    let idBillett = {id};
     $.get("/hentBillett", idBillett, function (data) {
+        document.getElementById("filmerEndre").value = data.film;
+        document.getElementById("antallEndre").value = data.antall;
         document.getElementById("fornavnEndre").value = data.fornavn;
         document.getElementById("etternavnEndre").value = data.etternavn;
         document.getElementById("telefonnrEndre").value = data.telefonnr;
@@ -129,7 +144,6 @@ function endreBillettBoks(id){
     })
 }
 function printBillett(billetter){
-    let teller = 0;
     let liste = document.getElementById("filmListe");
     liste.innerHTML = "";
     let printUt = "<div class='col-xs-2'>Film</div>"+"<div class='col-xs-1'>Antall</div>"+"<div class='col-xs-2'>Fornavn</div>"+
@@ -138,8 +152,7 @@ function printBillett(billetter){
 
         printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-1'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
             "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+
-            "</div><div class='col-xs-1'><button onclick='endreBillettBoks("+print.id+")'>Endre</button></div></div><br>";
-        teller++;
+            "</div><div class='col-xs-1'><button onclick='endreBillettBoks("+print.id+")'>Endre</button><button onclick='slettBillett("+print.id+")'>Slett</button></div></div><br>";
     }
     liste.innerHTML = printUt;
 }

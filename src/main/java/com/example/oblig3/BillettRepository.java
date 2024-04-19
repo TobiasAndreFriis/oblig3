@@ -54,13 +54,13 @@ public class BillettRepository {
     }
 
     public boolean oppdaterBillett(Billett billett){
-        String sql = "UPDATE Billett SET fornavn=?, etternavn=?, telefonnr=?, epost=? WHERE id=?";
+        String sql = "UPDATE Billett SET film=?, antall=?, fornavn=?, etternavn=?, telefonnr=?, epost=? WHERE id=?";
         try{
-           db.update(sql, billett.getFornavn(), billett.getEtternavn(), billett.getTelefonnr(), billett.getEpost(), billett.getId());
+           db.update(sql, billett.getFilm(), billett.getAntall(), billett.getFornavn(), billett.getEtternavn(), billett.getTelefonnr(), billett.getEpost(), billett.getId());
            return true;
         }
         catch(Exception e){
-            logger.error("Feil i endre billetten"+e);
+            logger.error("Feil i endre billetten: "+e);
             return false;
         }
     }
@@ -68,6 +68,17 @@ public class BillettRepository {
     public void slettAlleBilletter(){
         String sql = "DELETE FROM Billett";
         db.update(sql);
+    }
+
+    public void slettBillett(Billett innId){
+        System.out.println(innId.getId());
+        String sql = "DELETE FROM Billett WHERE id=?";
+        try{
+            db.update(sql, innId.getId());
+        }
+        catch(Exception e){
+            logger.error("Error med slett billett: "+e);
+        }
     }
 
 }

@@ -38,4 +38,9 @@ public class BillettController {
         rep.slettAlleBilletter();
         System.out.println("Billett tabellen er tømt!");
     }
+
+    @DeleteMapping("/slettBillett")
+    public void slettBillett(Billett billett){
+        rep.slettBillett(billett);
+    }
 }
