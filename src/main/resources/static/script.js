@@ -97,6 +97,15 @@ function innholdSjekk(film, antall, fornavn, etternavn, telefonnr, epost){
     }
     return gyldig;
 }
+function toggleEndreBillettBoks(){
+    var endreBoks = document.getElementById("endreBillettBoks");
+    if (endreBoks.style.display === "none"){
+        endreBoks.style.display = "block";
+    }
+    else{
+        endreBoks.style.display = "none";
+    }
+}
 function slettBillett(id){
     let idBillett = {id};
     $.ajax({
@@ -105,6 +114,7 @@ function slettBillett(id){
         data: idBillett,
         success: function (){
             hentBilletter()
+            document.getElementById("endreBillettBoks").style.display = "none"
         }
     })
 }
@@ -121,17 +131,12 @@ function endreBillett(){
     console.log(billett);
     $.post("/oppdatere", billett, function (){
         hentBilletter()
+        document.getElementById("endreBillettBoks").style.display = "none"
     })
 
 }
 function endreBillettBoks(id){
-    var endreBoks = document.getElementById("endreBillettBoks");
-    if (endreBoks.style.display === "none"){
-        endreBoks.style.display = "block";
-    }
-    else{
-        endreBoks.style.display = "none";
-    }
+    toggleEndreBillettBoks();
     document.getElementById("id").value = id;
     let idBillett = {id};
     $.get("/hentBillett", idBillett, function (data) {
@@ -146,13 +151,15 @@ function endreBillettBoks(id){
 function printBillett(billetter){
     let liste = document.getElementById("filmListe");
     liste.innerHTML = "";
-    let printUt = "<div class='col-xs-2'>Film</div>"+"<div class='col-xs-1'>Antall</div>"+"<div class='col-xs-2'>Fornavn</div>"+
-        "<div class='col-xs-2'>Etternavn</div>"+"<div class='col-xs-2'>TelefonNr</div>"+"<div class='col-xs-2'>Epost</div>"+"<div class='col-xs-1'></div><br><br>"
+    let printUt = "<table class='table table-striped'><tr><th>Film</th><th>Antall</th><th>Fornavn</th>" +
+        "<th>Etternavn</th><th>Telefonnr</th><th>Epost</th><th></th><th></th></tr>";
     for (let print of billetter){
 
-        printUt += "<div class='row'><div class='col-xs-2'>"+print.film+"</div><div class='col-xs-1'>"+print.antall+"</div><div class='col-xs-2'>"+print.fornavn+"</div>"+
-            "<div class='col-xs-2'>"+print.etternavn+"</div><div class='col-xs-2'>"+print.telefonnr+"</div><div class='col-xs-2'>"+print.epost+
-            "</div><div class='col-xs-1'><button onclick='endreBillettBoks("+print.id+")'>Endre</button><button onclick='slettBillett("+print.id+")'>Slett</button></div></div><br>";
+        printUt += "<tr><td>" + print.film + "</td><td>" + print.antall + "</td><td>" + print.fornavn + "</td>" +
+            "<td>" + print.etternavn + "</td><td>" + print.telefonnr + "</td><td>" + print.epost + "</td>" +
+            "<td> <button class='btn btn-primary' onclick='endreBillettBoks("+print.id+")'>Endre</button></td>"+
+            "<td> <button class='btn btn-danger' onclick='slettBillett("+print.id+")'>Slett</button></td>"+
+            "</tr>";
     }
     liste.innerHTML = printUt;
 }
