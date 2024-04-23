@@ -6,6 +6,8 @@ GitHub brukernavn: TobiasAndreFriis
 
 Github repo URL: https://github.com/TobiasAndreFriis/oblig3
 
+YouTube URL: https://youtu.be/skCEDCSL_VA
+
 Fullt navn: Tobias Andre Friis
 
 Kort beskrivelse av applikasjon (5-10 setninger):
