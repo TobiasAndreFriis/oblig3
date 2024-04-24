@@ -21,6 +21,7 @@ public class BillettRepository {
 
     private Logger logger = LoggerFactory.getLogger(BillettRepository.class);
 
+    //Lager en rowmapper for billett klassen
     class BillettRowMapper implements RowMapper< Billett > {
         @Override
         public Billett mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -36,23 +37,27 @@ public class BillettRepository {
         }
     }
 
+    //Lagrer billett i database
     public void lagreBillett(Billett innBillett){
         String sql = "INSERT INTO Billett (film, antall, fornavn, etternavn, telefonnr, epost) VALUES(?,?,?,?,?,?)";
         db.update(sql, innBillett.getFilm(), innBillett.getAntall(), innBillett.getFornavn(),
                 innBillett.getEtternavn(), innBillett.getTelefonnr(), innBillett.getEpost());
     }
 
+    //Henter alle billetter fra database
     public List<Billett> hentAlleBilletter(){
         String sql = "SELECT * FROM Billett ORDER BY etternavn";
         return db.query(sql, new BillettRowMapper());
     }
 
+    //Henter en billett fra database
     public Billett hentBillett(Billett innId){
         String sql = "SELECT * FROM Billett WHERE id=?";
         List<Billett> enBillett = db.query(sql, new BillettRowMapper(), innId.getId());
         return enBillett.get(0);
     }
 
+    //Oppdaterer en billett til database ved bruk av id
     public boolean oppdaterBillett(Billett billett){
         String sql = "UPDATE Billett SET film=?, antall=?, fornavn=?, etternavn=?, telefonnr=?, epost=? WHERE id=?";
         try{
@@ -65,11 +70,13 @@ public class BillettRepository {
         }
     }
 
+    //Sletter alle billetter i database
     public void slettAlleBilletter(){
         String sql = "DELETE FROM Billett";
         db.update(sql);
     }
 
+    //Sletter en billett fra database ved bruk av id
     public void slettBillett(Billett innId){
         System.out.println(innId.getId());
         String sql = "DELETE FROM Billett WHERE id=?";
